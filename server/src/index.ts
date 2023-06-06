@@ -10,6 +10,7 @@ import { useServer } from "graphql-ws/lib/use/ws";
 import { createServer } from "http";
 import { WebSocketServer } from "ws";
 import { UserController } from "./controller/user.js";
+import { connectToMongoDB } from "./database/db.js";
 import { resolvers } from "./schema/resolvers.js";
 import { typeDefs } from "./schema/typedefs.js";
 dotenv.config();
@@ -54,7 +55,7 @@ app.use(
   })
 );
 
-// await connectToMongoDB();
+await connectToMongoDB();
 httpServer.listen(PORT, () => {
   console.log(`🚀 Query endpoint ready at http://localhost:${PORT}/graphql`);
   console.log(
